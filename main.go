@@ -77,6 +77,18 @@ func (g *Game) Update(_ *ebiten.Image) error {
 		os.Exit(0)
 	}
 
+	if ebiten.IsKeyPressed(ebiten.KeyUp) {
+		g.tmp += 0.01
+	} else if ebiten.IsKeyPressed(ebiten.KeyDown) && g.tmp > 0 {
+		g.tmp -= 0.01
+	}
+
+	if ebiten.IsKeyPressed(ebiten.KeyRight) {
+		g.ins += 0.01
+	} else if ebiten.IsKeyPressed(ebiten.KeyLeft) && g.ins > 0 {
+		g.ins -= 0.01
+	}
+
 	return nil
 }
 
@@ -122,7 +134,7 @@ func main() {
 	flag.Float64Var(&ext, "e", 0, "The external field value")
 	flag.Float64Var(&ins, "i", 0.4, "The interaction strength")
 	flag.IntVar(&xs, "x", 1920/8, "X resolution")
-	flag.IntVar(&ys, "y", 1920/8, "Y resolution")
+	flag.IntVar(&ys, "y", 1080/8, "Y resolution")
 	flag.IntVar(&ss, "s", 4, "Scale (only works if not fullscreen)")
 	flag.BoolVar(&fs, "f", false, "Fullscreen")
 

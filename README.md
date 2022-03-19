@@ -1,5 +1,5 @@
 # Classical-XY-Model-Go
-A simple simulation of the Classical XY model, written in go, visualised with ebiten.
+A simple Monte Carlo simulation of the Classical XY model, written in go, visualised with ebiten.
 
 ### Command line flags:
 

@@ -11,21 +11,6 @@ import (
 	"time"
 )
 
-type vec2 struct {
-	x, y float64
-}
-
-func unitVec(angle float64) vec2 {
-	return vec2{
-		x: math.Cos(angle),
-		y: math.Sin(angle),
-	}
-}
-
-func (v *vec2) mag() float64 {
-	return math.Sqrt(math.Pow(v.x, 2) + math.Pow(v.y, 2))
-}
-
 type Game struct {
 	pixels []byte
 
@@ -127,20 +112,28 @@ func main() {
 		tmp float64
 		ext float64
 		ins float64
+		xs  int
+		ys  int
+		ss  int
+		fs  bool
 	)
 
 	flag.Float64Var(&tmp, "t", 0, "The temperature of the simulation")
 	flag.Float64Var(&ext, "e", 0, "The external field value")
 	flag.Float64Var(&ins, "i", 0.4, "The interaction strength")
+	flag.IntVar(&xs, "x", 1920/8, "X resolution")
+	flag.IntVar(&ys, "y", 1920/8, "Y resolution")
+	flag.IntVar(&ss, "s", 4, "Scale (only works if not fullscreen)")
+	flag.BoolVar(&fs, "f", false, "Fullscreen")
 
 	flag.Parse()
 
 	rand.Seed(time.Now().UnixNano())
 
 	g := &Game{
-		x: 1920 / 8,
-		y: 1080 / 8,
-		s: 1,
+		x: xs,
+		y: ys,
+		s: ss,
 
 		tmp: tmp,
 		ext: ext,
@@ -155,7 +148,7 @@ func main() {
 
 	ebiten.SetWindowTitle("Classical XY Model")
 	ebiten.SetWindowSize(g.x*g.s, g.y*g.s)
-	ebiten.SetFullscreen(true)
+	ebiten.SetFullscreen(fs)
 
 	if err := ebiten.RunGame(g); err != nil {
 		log.Fatal(err)

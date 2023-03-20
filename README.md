@@ -4,6 +4,8 @@ A simple simulation of the Classical XY model, written in go, visualised with eb
 
 Use up/down arrow keys to increase or decrease temperature respectively. Also use right/left to increase or decrease interaction strength respectively.
 
+You can see a more interactive version of this on my [website](https://e74000.net/posts/xymodel/).
+
 ### Command line flags:
 
 * `-t`: The initial temperature of the simulation.
